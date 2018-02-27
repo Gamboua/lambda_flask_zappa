@@ -20,13 +20,13 @@ def callback_mercadolivre():
 
     conn = pymysql.connect(rds_config.host, user=rds_config.user, passwd=rds_config.pswd, db=rds_config.base)
     with conn.cursor() as cur:
-        cur.execute("INSERT INTO notificacao_mercado_livre(user_id, resource, topic, received, sent) VALUES('%s', '%s', '%s', '%s', '%s')" % 
+        cur.execute("INSERT INTO notificacao_mercadolivre(user_id, resource, topic, received, sent) VALUES('%s', '%s', '%s', '%s', '%s')" % ( 
             content.get('user_id'),
             content.get('resource'),
             content.get('topic'),
             content.get('received'),
             content.get('sent')
-        ) 
+        ))
         conn.commit()
         
     return Response(json.dumps(

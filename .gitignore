@@ -1,0 +1,4 @@
+.env
+*.pyc
+zappa_settings.json
+rds_config.py
