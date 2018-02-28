@@ -1,13 +1,12 @@
-Criando API na AWS (Lambda + API Gateway + ACM + ROUTE 53 + RDS)
+# Criando API na AWS (Lambda + API Gateway + ACM + ROUTE 53 + RDS)
 
-Requisitos:
-- Conta na AWS
-- Credenciais de acesso a API
-- Domínio no Registrobr
-- AWS CLI instalado
-- python
-- pip
-- virtualenv
+## Requisitos:
+* Conta na AWS
+* Credenciais de acesso da API
+* AWS CLI instalado
+* python
+* pip
+* virtualenv
 
 Instalar AWS CLI
 ```bash
@@ -135,7 +134,11 @@ $ zappa deploy dev
 ```
 
 Pegar o id d APIG
+```bash
 $ aws apigateway get-rest-apis --query "items[0].id"
+```
 
 Adicione entrada no base path do APIG
+```bash
 $ aws apigateway create-base-path-mapping --domain-name api.pimentagabriel.com.br --rest-api-id ApiId --stage dev
+```
