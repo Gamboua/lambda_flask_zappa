@@ -1,4 +1,4 @@
-# Criando API na AWS (Lambda + API Gateway + ACM + ROUTE 53 + RDS)
+# Serveless (Lambda + API Gateway + ACM + ROUTE 53 + RDS)
 
 ## Requisitos:
 * Conta na AWS
