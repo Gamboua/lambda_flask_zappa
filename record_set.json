@@ -1,0 +1,18 @@
+{
+    "Comment": "",
+    "Changes": [
+      {
+        "Action": "CREATE",
+        "ResourceRecordSet": {
+          "Name": "name_do_acm_guardado",
+          "Type": "CNAME",
+          "TTL": 300,
+          "ResourceRecords": [
+            {
+              "Value": "value_do_acm_guardado"
+            }
+          ]
+        }
+      }
+    ]
+}

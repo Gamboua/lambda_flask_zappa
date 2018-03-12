@@ -1,8 +1,8 @@
 # Criando API na AWS (Lambda + API Gateway + ACM + ROUTE 53 + RDS)
 
-## Requisitos:
+### Requisitos:
 * Conta na AWS
-* Credenciais de acesso da API
+* Credenciais de acesso da API (https://docs.aws.amazon.com/pt_br/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey_CLIAPI)
 * AWS CLI instalado
 * python
 * pip
@@ -13,8 +13,14 @@ Instalar AWS CLI
 $ pip install awscli --upgrade --user
 ```
 
-@TODO
-Adicionar credenciais da AWS API
+### Configurando o ambiente
+Com suas credenciais cria o arquivo com as informações em ~/.aws/credentials
+```bash
+$ vim ~/.aws/credentials
+    + [default]
+    + aws_access_key_id = access_key_is
+    + aws_secret_access_key = secret_access_key
+```
 
 Crie a instancia RDS
 ```bash
@@ -36,14 +42,32 @@ $ aws rds describe-db-instances --query "DBInstances[*].Endpoint.Address"
 ```
 
 @TODO
-Criar certificado
+Criar certificado. Guarde o arn retornado:
+```bash
+$ aws acm request-certificate --domain-name *.domainname.com.br --validation-method DNS --idempotency-token 3dfd7bd5 --subject-alternative-names domainname.com.br
+```
 
-@TODO
-Para ter o arn do certificado
+ Pesquise pelo mesmo arn para ter as informações de validação. Guarde os dados por serão usados logo:
+```bash
+$ aws acm describe-certificate --certificate-arn arn:valido_retornado --query "Certificate.DomainValidationOptions[0].ResourceRecord"
+```
 
-@TODO
-Criar entrada no Route 53
+Altere o arquivo record_set.json do projeto e insira os valores Name e Value nos seus respectivos campos:
+```bash
+$ vim record_set.json
+    + "Name": "name_do_acm_guardado",
+    + "Value": "value_do_acm_guardado"
+```
 
+Crie uma hosted zone. O último parâmetro é apenas um identificador, nele podemos inserir a data atual, por exemplo:
+```bash
+$ aws route53 create-hosted-zone --name domainname.com.br --caller-reference 2018-03-012-10:47
+```mas tá suave
+
+Crie o record set adicionando o Id do hosted zone gerado no campo anterior:
+```bash
+$ aws route53 change-resource-record-sets --hosted-zone-id hosted-zone-id --change-batch file://record_set.json
+```
 
 Clone o projeto
 ```bash
