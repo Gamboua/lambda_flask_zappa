@@ -62,13 +62,14 @@ $ vim record_set.json
 Crie uma hosted zone. O último parâmetro é apenas um identificador, nele podemos inserir a data atual, por exemplo:
 ```bash
 $ aws route53 create-hosted-zone --name domainname.com.br --caller-reference 2018-03-012-10:47
-```mas tá suave
+```
 
 Crie o record set adicionando o Id do hosted zone gerado no campo anterior:
 ```bash
 $ aws route53 change-resource-record-sets --hosted-zone-id hosted-zone-id --change-batch file://record_set.json
 ```
 
+### 
 Clone o projeto
 ```bash
 $ git clone https://github.com/Gamboua/lambda_flask_zappa.git
